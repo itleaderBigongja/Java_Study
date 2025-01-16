@@ -1,0 +1,16 @@
+package thread;
+
+public class Runnable_3 {
+
+	public static void main(String[] args) {
+		Thread work = new Thread();
+	}
+}
+
+class Runnable_3_1 implements Runnable {
+	
+	@Override
+	public void run() {
+		
+	}
+}

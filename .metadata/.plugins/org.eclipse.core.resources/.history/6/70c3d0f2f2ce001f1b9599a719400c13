@@ -1,0 +1,38 @@
+package thread_4;
+
+public class ThreadSync_3 {
+	
+	public static void main(String[] args) {
+		Memory mem = new Memory(16);
+		Download down = new Download(mem);
+		Play play = new Play(mem);
+		
+		down.start();
+		play.start();
+	}
+}
+
+class Memory_3 {
+	int[] buffer;
+	int size;
+	int progress;
+	
+	Memory_3(int asize) {
+		size = asize;
+		buffer = new int[asize];
+		progress = 0;
+	}
+}
+
+class Download_3 extends Thread {
+	
+	Memory_3 mem;
+	public Download_3(Memory_3 amem) {
+		
+	}
+	
+	@Override
+	public void run() {
+		
+	}
+}

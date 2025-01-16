@@ -1,0 +1,15 @@
+package thread;
+
+public class thread_1 {
+
+	/**
+	 * RoundRobin
+	 * 운영체제는 CPU의 시간을 잘게 쪼개 교댜ㅐ로 스레드를 실행하여 동시에 여러 가지 일을 처리하는 것처럼
+	 * 흉내 내는데, 이런 방식을 라운드 로빈(RoundBin)
+	 */ 
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		System.out.println();
+	}
+
+}

@@ -1,0 +1,12 @@
+package thread;
+
+public class Runnable_3 {
+
+	public static void main(String[] args) {
+		Thread work = new Thread();
+		
+		for(int num = 0; num < 30; num++) {
+			
+		}
+	}
+}

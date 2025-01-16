@@ -1,0 +1,78 @@
+package thread_4;
+/** 동기화 스레드 캡슐화
+ *  다운로드 받은 동작과 재생하는 동작은 모두 Memory 객체를 대상으로 한다. 그래서
+ *  두 동작을 Memory 클래스 안의 메서드로 캡슐화하고, 스레드에서 공유 객체의 메서드를 호출하는 방법을 쓸 수 있다.
+ * */
+public class ThreadSync_5 {
+	
+	
+}
+
+class Memory_5 {
+	int[] buffer;
+	int size;
+	int progress;
+	
+	// 공유객체 생성자 호출
+	Memory_5(int asize) {
+		size = asize;
+		buffer = new int[size];
+		progress = 0;
+	}
+	
+	void DownChunk(int off) {
+		for(int chunk = 0; chunk < 2; chunk++) {
+			buffer[off+chunk] = off+chunk;
+			progress = off + chunk + 1;
+			try {
+				Thread.sleep(200);
+			} catch (InterruptedException e) {
+				;
+			}
+		}
+	}
+	
+	void PlayDownload() {
+		for(int off = 0; off < progress; off++) {
+			System.out.println(buffer[off] + " ");
+		}
+		System.out.println();
+	}
+}
+
+class DownLoad_5 extends Thread{
+	
+	Memory_5 mem;
+	
+	DownLoad_5(Memory_5 amem) {
+		mem = amem;
+	}
+	
+	@Override
+	public void run() {
+		for(int off = 0; off < mem.size; off += 2) {
+			mem.DownChunk(off);
+		}
+	}
+}
+
+class Play_5 extends Thread {
+	
+	Memory_5 mem;
+	Play_5(Memory_5 amem) {
+		mem = amem;
+	}
+	
+	@Override
+	public void run() {
+		for(;;) {
+			mem.PlayDownload();
+			if(mem.progress == mem.size) break;
+			try {
+				Thread.sleep(500);
+			} catch (InterruptedException e) {
+				// TODO: handle exception
+			}
+		}
+	}
+}

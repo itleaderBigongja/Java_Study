@@ -1,0 +1,12 @@
+package thread;
+
+/** 여러 개의 스레드
+ * 
+ * */
+public class MultiThread_1 {
+	
+	public static void main(String[] args) {
+		
+	}
+
+}

@@ -1,0 +1,23 @@
+package thread_4;
+
+public class ThreadSync_5 {
+
+	public static void main(String[] args) {
+		Memory_5 mem = new Memory_5(16);
+		
+		down.start();
+		play.start();
+	}
+}
+
+class Memory_5 {
+	int[] buffer;
+	int size;
+	int progress;
+	
+	Memory_5(int asize) {
+		size = asize;
+		buffer = new int[asize];
+		progress = 0;
+	}
+}

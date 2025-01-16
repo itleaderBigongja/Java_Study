@@ -1,0 +1,12 @@
+package thread_4;
+/** 스레드 동기화(syncronized)
+ * 
+ * */
+public class ThreadSync_9 {
+
+	public static void main(String[] args) {
+		
+	}
+}
+
+

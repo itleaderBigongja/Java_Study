@@ -1,0 +1,76 @@
+package thread_4;
+
+public class ThreadSync_5 {
+
+	public static void main(String[] args) {
+		Memory_5 mem = new Memory_5(16);
+		DownLoad_5 down = new DownLoad_5(mem);
+		Play_5 play = new Play_5(mem);
+		
+		down.start();
+		play.start();
+	}
+}
+
+class Memory_5 {
+	int[] buffer;
+	int size;
+	int progress;
+	
+	Memory_5(int asize) {
+		size = asize;
+		buffer = new int[asize];
+		progress = 0;
+	}
+}
+
+class Play_5 extends Thread{
+	Memory_5 mem;
+	
+	Play_5(Memory_5 amem) {
+		mem = amem;
+	}
+	
+	@Override
+	public void run() {
+		synchronized (mem) {
+			try {
+				mem.wait();
+			} catch (InterruptedException e) {
+				;
+			}
+		}
+		
+		for(int off = 0; off < mem.progress; off++) {
+			System.out.print(mem.buffer[off] + " ");
+		}
+		System.out.println();
+	}
+}
+
+class DownLoad_5 extends Thread{
+	
+	Memory_5 mem;
+	DownLoad_5(Memory_5 amem) {
+		mem = amem;
+	}
+	
+	@Override
+	public void run() {
+		System.out.println("다운로드 시작!");
+		synchronized (mem) {
+			// 현재의 스레드를 깨운다.
+			mem.notify();
+		}
+		for(int off = 0; off < mem.size; off++) {
+			mem.buffer[off] = off;
+			mem.progress = off + 1;
+			try {
+				Thread.sleep(200);
+				System.out.print(mem.progress + " ");
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
+		}
+	}
+}

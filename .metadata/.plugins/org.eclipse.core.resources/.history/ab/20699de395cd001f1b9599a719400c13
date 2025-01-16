@@ -1,0 +1,8 @@
+package thread_2;
+
+public class ThreadAdmin_2 {
+
+	public static void main(String[] args) {
+		
+	}
+}

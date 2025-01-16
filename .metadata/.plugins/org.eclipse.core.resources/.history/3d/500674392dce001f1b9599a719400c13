@@ -1,0 +1,13 @@
+package thread_4;
+
+/** 스레드 통신(동기화)
+ * 
+ * */
+public class ThreadSync {
+	
+	public static void main(String[] args) {
+		
+	}
+}
+
+

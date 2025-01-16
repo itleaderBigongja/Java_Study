@@ -1,0 +1,15 @@
+package thread_5;
+
+/** ExcutorSerivce란?
+ *  ExcutorService는 자바에서 스레드 풀(Thread Pool)을 관리하기 위한 인터페이스로,
+ *  스레드 생성과 실행 관리를 효율적으로 처리합니다. 일반적으로 직접 스레드를 생성하고 관리하는 대신
+ *  ExcutorService를 사용하면, 스레드의 생성/종료/큐 관리 등을 자동으로 처리하여
+ *  성능과 안전성을 높일 수 있습니다.
+ * */
+public class ExcutorServiceThread {
+
+	public static void main(String[] args) {
+
+	}
+
+}

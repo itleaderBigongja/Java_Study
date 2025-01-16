@@ -1,0 +1,55 @@
+package thread_4;
+
+public class ThreadSync_3 {
+	
+	public static void main(String[] args) {
+		Memory mem = new Memory(16);
+		Download down = new Download(mem);
+		Play play = new Play(mem);
+		
+		down.start();
+		play.start();
+	}
+}
+
+class Memory_3 {
+	int[] buffer;
+	int size;
+	int progress;
+	
+	Memory_3(int asize) {
+		size = asize;
+		buffer = new int[asize];
+		progress = 0;
+	}
+}
+
+class Download_3 extends Thread {
+	
+	Memory_3 mem;
+	public Download_3(Memory_3 amem) {
+		mem = amem;
+	}
+	
+	@Override
+	public void run() {
+		
+		for(int off = 0; off < mem.size; off += 2) {
+			synchronized (mem) {
+				for(int chunk = 0; chunk < 2; chunk++) {
+					mem.buffer[off+chunk] = off + chunk;
+					mem.progress = off+chunk +1;
+					try {
+						Thread.sleep(200);
+					} catch (InterruptedException e) {
+						;
+					}
+				}
+			}
+		}
+	}
+}
+
+class Play extends Thread {
+	
+}

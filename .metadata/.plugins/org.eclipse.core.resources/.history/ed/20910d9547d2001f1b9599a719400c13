@@ -1,0 +1,26 @@
+package thread_5;
+
+import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
+
+public class ExecutorServiceExample_2 {
+
+	public static void main(String[] args) {
+		
+		// 1. Custom ThreadPoolExcutor 생성
+		ThreadPoolExecutor customExecutor = new ThreadPoolExecutor(
+				2, // corePoolSize=2 
+				4, // maximumPoolSize : 4 
+				30, // 30초
+				TimeUnit.SECONDS // 초 단위로 실행
+				, new LinkedBlockingQueue<Runnable>(10) // 작업 큐 크기 = 10
+				, new ThreadPoolExecutor.CallerRunsPolicy() // CallerRunsPolicy 적용
+				// CallerRunsPolicy : 큐가 꽉 차면 호출한 스레드에서 작업을 실행
+		);
+		
+		for(int i = 1; i <= 15; i++) {
+			int taskId = i;
+		}
+	}
+}

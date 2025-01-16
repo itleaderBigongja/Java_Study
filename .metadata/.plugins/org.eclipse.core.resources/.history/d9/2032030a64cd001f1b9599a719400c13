@@ -1,0 +1,14 @@
+package thread;
+
+public class Runnable_1 {
+
+	/**
+	 * Runnable = 인터페이스
+	 * Thread 클래스 상속이 어려운 경우, 이럴 때는 run 메서드를 정의하는 Runnable 인터페이스를 구현 클래스를 정의하고
+	 * 이 클래스의 객체를 Thread의 생성자로 전달하는 방법을 사용한다. run() 메서드를 누가 구현하는가의 차이만 있을 뿐 거의 같은 방법이다.
+	 * */
+	public static void main(String[] args) {
+		
+	}
+
+}

@@ -1,0 +1,19 @@
+package thread_4;
+
+public class Thread_Sync_4 {
+
+	public static void main(String[] args) {
+		
+	}
+}
+
+class Memory_4 {
+	
+	int[] buffer;
+	int size;
+	int progress;
+	
+	public Memory_4(int size) {
+		
+	}
+}

@@ -1,0 +1,33 @@
+package thread;
+
+public class Runnable_2 {
+	
+	public static void main(String[] args) {
+		
+		PrintRunnable_2 runnable_2 = new PrintRunnable_2();
+		Thread work = new Thread(runnable_2);
+		work.start();
+	}
+}
+
+class PrintRunnable_2 implements Runnable{
+
+	@Override
+	public void run() {
+		
+	}
+}
+
+class GetNameClass {
+	private String name;
+	
+	public void getName() throws InterruptedException {
+		for(int i = 0; i < 10; i++) {
+			if(i == 0) name = "탁우근";
+			if(i > 0)  name = "개발자";
+			System.out.println(name);
+			Thread.sleep(100);
+		}
+	}
+	
+}

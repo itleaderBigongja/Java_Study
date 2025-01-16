@@ -1,0 +1,11 @@
+package thread_3;
+
+/** 데몬스레드(Daemon Thread)
+ * */
+public class DaemonThread {
+
+	public static void main(String[] args) {
+		
+	}
+
+}

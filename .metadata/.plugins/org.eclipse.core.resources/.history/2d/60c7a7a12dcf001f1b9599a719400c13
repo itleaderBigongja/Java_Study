@@ -1,0 +1,27 @@
+package thread_4;
+
+/** 스레드 종료 대기
+ *  join() : 현재 실행중인 스레드는 다른 스레드가 작업을 완료할 때까지 기다립니다.
+ *           순차적인 실행 흐름을 만들 때 유용합니다.
+ * */
+public class ThreadSync_7 {
+
+	public static void main(String[] args) {
+		
+	}
+}
+
+class MyThread extends Thread {
+	
+	public void run() {
+		for(int i = 0; i < 5; i++) {
+			System.out.println(getName() + " - " + i);
+			
+			try {
+				
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
+		}
+	}
+}

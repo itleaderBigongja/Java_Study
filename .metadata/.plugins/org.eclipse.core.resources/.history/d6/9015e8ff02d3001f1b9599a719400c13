@@ -1,0 +1,52 @@
+package thread_5;
+
+import java.util.concurrent.RecursiveTask;
+
+/** 스레드 풀(ThreadPool) 작업 단위 세분화 예제
+ *  스레드 풀로 생성한 스레드 단위에서 ForkJoinPool을 사용하여 세분화 작업을 진행할 예정 
+ */
+public class ExecutorServiceExample_4 {
+	
+	static class ThreadPoolWithForkJoinExample {
+		
+		// ForkJoinPool에서 실행할 작업 정의
+		class SumTask extends RecursiveTask<Integer> {
+
+			private final int[] array;
+			private final int start;
+			private final int end;
+			
+			public SumTask(int[] array, int start, int end) {
+				this.array = array;
+				this.start = start;
+				this.end = end;
+			}
+			
+			@Override
+			protected Integer compute() {
+				// 작은 작업이면 직접 계산
+				if(end - start <= 5) {
+					int sum = 0;
+					for(int i = start; i < end; i++) {
+						sum += array[i];
+					}
+					
+					return sum;
+				}else { // 큰 작업이면 분할
+					int mid = (start + end) / 2;
+					SumTask leftTask = new SumTask(array, start, mid);	// 배열에서 첫 번째 부터 가운데까지의 연산
+					SumTask rightTask = new SumTask(array, mid, end);   // 배열에서 가운데 이상부터 마지막까지 연산
+					
+					leftTask.fork();	// 왼쪽 작업 분할
+					int rightResult = rightTask.compute();
+					int leftResult = leftTask.join();
+					return null;
+				}
+			}
+		}
+	}
+	
+	public static void main(String[] args) {
+		
+	}
+}

@@ -1,0 +1,9 @@
+package thread;
+
+public class MultiThread_1 {
+
+	public static void main(String[] args) {
+		
+	}
+
+}

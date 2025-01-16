@@ -1,0 +1,47 @@
+package thread_4;
+/** 스레드 동기화(syncronized)
+ *  ㅇ 스레드가 공유 자원에 접근할 때 충돌을 방지하기 위해 사용됩니다.
+ *  ㅇ syncronized 키워드를 사용하여 메서드나 블록을 동기화할 수 있습니다.
+ * */
+public class ThreadSync_9 {
+
+	public static void main(String[] args) {
+		
+		Counter counter = new Counter();
+		
+		// Runnable의 run() 메서드를 람다식으로 표현함
+		Runnable task = () -> {
+            for (int i = 0; i < 10000; i++) {
+                counter.increment();
+            }
+        };
+        
+        Thread worker_1 = new Thread(task);
+        Thread worker_2 = new Thread(task);
+        
+        worker_1.start();
+        worker_2.start();
+        
+        try {
+			worker_1.join();
+			worker_2.join();
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+        System.out.println("마지막 카운트의 개수 : " + counter.getCounter());
+	}
+}
+
+class Counter {
+	private int count = 0;
+	
+	// 첫 번째 스레드가 count를 더할수도 있고, 가지고 있을수도 있다.
+	// 두 번째 스레드가 count를 더할수도 있고, 가지고 있을수도 있다.
+	public void increment() {
+		count++;
+	}	
+	public int getCounter() {
+		return count;
+	}
+}
+

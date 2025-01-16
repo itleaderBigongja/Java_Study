@@ -1,0 +1,15 @@
+package thread_4;
+
+/** 스레드 통신(동기화)
+ *  스레드는 보통 완전히 독립적이다. 그러나 때로는 연관된 작업을 분담하여 실행하는 경우가 있다.
+ *  이때는 공유 데이터가 있고, 데이터를 적절히 간리하기 위해 서로 통신해야 한다.
+ *  
+ * */
+public class ThreadSync {
+	
+	public static void main(String[] args) {
+		
+	}
+}
+
+

@@ -1,0 +1,48 @@
+package thread_4;
+
+public class ThreadSync_5 {
+
+	public static void main(String[] args) {
+	
+		Thread worker_1 = new Thread(new Runnable() {
+			
+			@Override
+			public void run() {
+				try {
+					Thread.currentThread().wait(5000);
+					System.out.println("첫번째 스레드 시작");
+				} catch (InterruptedException e1) {
+					e1.printStackTrace();
+				}
+				
+				for(int i = 0; i < 10; i++) {
+					try {
+						Thread.sleep(1000);
+						System.out.print(i+" ");
+					} catch (Exception e) {
+						;
+					}
+				}
+			}
+		});
+		
+		Thread worker_2 = new Thread(new Runnable() {
+			
+			@Override
+			public void run() {
+				System.out.println("두번째 스레드 시작");
+				for(int i = 0; i < 20; i++) {
+					try {
+						Thread.sleep(1000);
+						
+						System.out.print(i +" ");
+					} catch (Exception e) {
+						;
+					}
+				}
+			}
+		});
+		worker_1.start();
+		worker_2.start();
+	}
+}

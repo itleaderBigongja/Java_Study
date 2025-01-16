@@ -1,0 +1,17 @@
+package thread;
+
+public class Runnable_3 {
+
+	public static void main(String[] args) {
+		Thread work = new Thread();
+		
+		for(int num = 0; num < 30; num++) {
+			try {
+				System.out.println(num + "번째 메인 스레드 호출!!");
+				Thread.sleep(100);
+			} catch (InterruptedException e) {
+				;
+			}
+		}
+	}
+}

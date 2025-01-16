@@ -1,0 +1,44 @@
+package thread;
+
+import java.awt.Toolkit;
+
+/** 여러 개의 스레드
+ * 생성 가능한 스레드의 개수에는 물리적으로 제한은 없지만, 스레드 관리를 위한 정보와 호출 스택을 위해 
+ * 메모리를 소모하기 때문에 무한히 생성할 수는 없다. 또 CPU의 처리 속도에도 한계가 있어
+ * 너무 많이 만들면 전체적인 성능이 떨어진다. 그러나 적어도 문법적으로 제약이 없어 원하는 만큼 만들어도 상관없다.
+ * 실제 서버 프로세스는 다중 사용자를 대기하기 위해 수백 개의 스레드를 생성하여 돌리기도 한다.
+ * */
+public class MultiThread_1 {
+	
+	public static void main(String[] args) {
+		
+	}
+}
+
+class PrintThread extends Thread {
+	
+	char ch;
+	public PrintThread(char ch) {
+		this.ch = ch;
+	}
+	
+	@Override
+	public void run() {
+		try {
+			for(int num = 0; num < 30; num++) {
+				System.out.println(num + "번째 서브 스레드 실행");
+				System.out.println(ch);
+				Thread.sleep(100);
+			}
+		} catch (InterruptedException e) {
+			;
+		}
+	}
+}
+
+class BeepThread extends Thread {
+	
+	int count;
+	int gap;
+	Toolkit tool = Toolkit.getDefaultToolkit();
+}
