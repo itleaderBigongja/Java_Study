@@ -1,9 +1,0 @@
-package thread_4;
-
-public class Thread_Sync_4 {
-
-	public static void main(String[] args) {
-		
-	}
-
-}

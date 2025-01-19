@@ -1,9 +1,0 @@
-package thread_5;
-
-public class ExcutorServiceThread {
-
-	public static void main(String[] args) {
-
-	}
-
-}

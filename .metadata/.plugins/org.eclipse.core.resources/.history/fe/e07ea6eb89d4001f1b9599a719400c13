@@ -1,0 +1,9 @@
+package thread_5;
+
+public class ExecutorServiceExample_6 {
+
+	public static void main(String[] args) {
+		
+	}
+
+}
