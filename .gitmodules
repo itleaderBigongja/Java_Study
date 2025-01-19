@@ -10,3 +10,6 @@
 [submodule "OpenSource_Project/netty"]
 	path = OpenSource_Project/netty
 	url = https://github.com/netty/netty.git
+[submodule "netty"]
+	path = netty
+	url = https://github.com/netty/netty.git
