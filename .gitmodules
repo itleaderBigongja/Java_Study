@@ -1,0 +1,6 @@
+[submodule "commons-lang"]
+	path = commons-lang
+	url = https://github.com/apache/commons-lang.git
+[submodule "OpenSource_Project/commons-lang"]
+	path = OpenSource_Project/commons-lang
+	url = https://github.com/apache/commons-lang.git
