@@ -1,1 +1,7 @@
+/.metadata/
+/.recommenders/
+.classpath
+.project
+.gitignore
+.settings/
 /Thread/
