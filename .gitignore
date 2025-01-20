@@ -1,0 +1,6 @@
+/.metadata/
+/*.log
+/.recommenders/
+/bin/
+/.settings/
+/target/

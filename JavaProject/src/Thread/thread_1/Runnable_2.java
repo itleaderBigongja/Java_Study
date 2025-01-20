@@ -45,6 +45,7 @@ class PrintRunnable_2 extends GetNameClass implements Runnable{
 class GetNameClass {
 	private String name;
 	
+	// 현재 클래스의 이름을 불러오는 메소드
 	public void getName() throws InterruptedException {
 		for(int i = 0; i < 10000; i++) {
 			Thread.sleep(100);
