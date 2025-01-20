@@ -9,7 +9,8 @@ package Thread.thread_4;
  *  [ 스레드 상태와 대기 ]
  *  스레드는 다음과 같은 상태를 가질 수 있으며, 대기는 주로, 
  *  WATING, TIMED_WAITING, 또는 BLOCKED 상태와 관련이 있습니다.
- *  ㅇ Thread.currentThread().getState(); 
+ *  
+ *  [ Thread.currentThread().getState(); ]
  *  ㅇ NEW : 스레드가 생성되었지만 아직 시작되지 않은 상태
  *  ㅇ RUNNABLE : 실행 가능한 상태. 실제 실행 중일 수도 있고, CPU 할당을 기다릴 수도 있음.
  *  ㅇ WAITING : 다른 스레드가 신호를 줄 때까지 무기한 대기

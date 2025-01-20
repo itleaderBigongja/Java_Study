@@ -10,11 +10,20 @@ public class ThreadSync_9 {
 		Counter counter = new Counter();
 		
 		// Runnable의 run() 메서드를 람다식으로 표현함
+//		Object mutex = new Object();
+//		Runnable task = () -> {
+//			synchronized (mutex) {
+//				for (int i = 0; i < 10000; i++) {
+//	                counter.increment();
+//	            }
+//			}
+//        };
+		
 		Runnable task = () -> {
-            for (int i = 0; i < 10000; i++) {
-                counter.increment();
-            }
-        };
+			for(int i = 0; i < 10000; i++) {
+				counter.increment();
+			}
+		};
         
         Thread worker_1 = new Thread(task);
         Thread worker_2 = new Thread(task);

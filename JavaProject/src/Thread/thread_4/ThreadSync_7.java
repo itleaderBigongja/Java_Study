@@ -6,7 +6,7 @@ package Thread.thread_4;
  *  
  *  [ 스레드 종료 대기 방식 ]
  *  1. Thread.join() 메서드 사용
- *  -> Thread.join() 메서드는 호출한 스레드가 종료될 때까지 
+ *  -> Thread.join() 메서드 : 스레드로 호출된 프로세스가 종료가 될 때까지 기다립니다. 
  *     현재 스레드를 BLOCKED(다른 스레드가 락을 해제할 때까지 대기)상태로 전환합니다.
  *     
  *  2. Thread.join(timeout)
@@ -28,8 +28,8 @@ public class ThreadSync_7 {
 	public static void main(String[] args) {
 		
 		MyThread worker_1 = new MyThread();
-		worker_1.setName("첫번째 스레드");
 		MyThread worker_2 = new MyThread();
+		worker_1.setName("첫번째 스레드");
 		worker_2.setName("두번째 스레드");
 		
 		worker_1.start();
