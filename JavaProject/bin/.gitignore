@@ -1,7 +1,12 @@
-/.metadata/
+.metadata/
 /.recommenders/
 .classpath
 .project
 .gitignore
-.settings/
+/.settings/
+/.projects/
+/.root/
+/.safetable/
+/9.snap
 /Thread/
+/workbench
