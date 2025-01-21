@@ -1,4 +1,4 @@
-.metadata/
+../../.metadata/
 /.recommenders/
 .classpath
 .project
@@ -10,3 +10,5 @@
 /9.snap
 /Thread/
 /workbench
+/Solid/
+/Lambda/
