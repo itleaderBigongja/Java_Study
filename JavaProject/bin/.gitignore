@@ -1,14 +1,2 @@
-../../.metadata/.
-/.recommenders/
-.classpath
-.project
-.gitignore
-/.settings/
-/.projects/
-/.root/
-/.safetable/
-/9.snap
-/Thread/
-/workbench
-/Solid/
-/Lambda/
+/target/
+/.metadata/
