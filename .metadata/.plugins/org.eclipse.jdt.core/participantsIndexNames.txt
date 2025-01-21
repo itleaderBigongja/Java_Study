@@ -1,3 +1,0 @@
-INDEX VERSION 1.131
-/Users/bigongja/eclipse-workspace/.metadata/.plugins/org.eclipse.jst.jsp.core/jspsearch/2858832861.index
-/JspProjectTest/src/main/java

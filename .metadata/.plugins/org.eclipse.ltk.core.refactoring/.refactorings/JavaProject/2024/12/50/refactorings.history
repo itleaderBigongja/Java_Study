@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<session version="1.0">
-<refactoring comment="Rename compilation unit &apos;encapsulation.Encapsulation_1.java&apos; to &apos;Time.java&apos;&#x0A;- Original project: &apos;JavaProject&apos;&#x0A;- Original element: &apos;encapsulation.Encapsulation_1.java&apos;&#x0A;- Renamed element: &apos;encapsulation.Time.java&apos;" description="Rename compilation unit &apos;Encapsulation_1.java&apos;" flags="2" id="org.eclipse.jdt.ui.rename.compilationunit" input="/src&lt;encapsulation{Encapsulation_1.java" name="Time.java" references="false" stamp="1734207150395" version="1.0"/>
-</session>

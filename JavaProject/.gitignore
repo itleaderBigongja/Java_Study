@@ -1,0 +1,12 @@
+.metadata/
+.settings/
+bin/
+*.class
+*.snap
+*.prefs
+*.log
+*.tmp
+*.launch
+.project
+.classpath
+.DS_Store
