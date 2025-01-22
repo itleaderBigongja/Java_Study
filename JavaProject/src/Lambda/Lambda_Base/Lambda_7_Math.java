@@ -1,4 +1,4 @@
-package Lambda;
+package Lambda.Lambda_Base;
 
 import java.util.Arrays;
 import java.util.List;
@@ -54,9 +54,5 @@ public class Lambda_7_Math {
 		 * */
 		boolean noneNegative = numbers.stream()
 							  .noneMatch(n -> n < 0);
-		
-		/** noneMath
-		 * */
-		
 	}
 }
