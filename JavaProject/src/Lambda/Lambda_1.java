@@ -29,7 +29,7 @@ public class Lambda_1 {
 	// 람다 표현식 사용 전 : Comparator 익명 클래스 사용
 	public static void sortBeforeLambda(List<String> names) {
 		
-		// Collections.sort 메서드를 이ㅣ용하여 리스트를 정렬 합니다.
+		// Collections.sort 메서드를 이용하여 리스트를 정렬 합니다.
 		Collections.sort(names, new Comparator<String>() {
 
 			// Comparator 인터페이스를 익명 클래스로 구현하여 compare 메서드를 Override(재정의)합니다.
