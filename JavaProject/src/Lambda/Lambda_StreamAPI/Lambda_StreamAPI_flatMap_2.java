@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 // 예시 : 객체 리스트에서 내부 리스트 추출하는 예제
-
 class Person {
 	
 	private String name;			// 이름
