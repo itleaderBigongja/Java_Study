@@ -9,7 +9,7 @@ import java.util.List;
  *  람다 표현식은 익명 함수를 만드는 방법 -> 기존의 자바에서 메서드를 정의하려면 클래스 내부에 있어야 했지만,
  *  람다 표현식을 사용하면 메서드처럼 동작하는 코드를 간결하게 표현할 수 있음
  * */
-public class Lambda_1 {
+public class Lambda_1_Comparator {
 	/** ㅇ 익명함수( Anonymous Function
 	 *  -> 이름이 없는 함수, 즉, 함수를 정의하면서 함수 이름을 지정하지 않습니다.
 	 *  ㅇ 함수형 인터페이스( Functional Interface )
