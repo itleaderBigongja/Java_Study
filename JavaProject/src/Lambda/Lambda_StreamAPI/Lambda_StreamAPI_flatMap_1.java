@@ -6,7 +6,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 // 문자열 리스트에서 단어 추출
-public class Lambda_StreamAPI_flatMap {
+public class Lambda_StreamAPI_flatMap_1 {
 
 	public static void main(String[] args) {
 		
