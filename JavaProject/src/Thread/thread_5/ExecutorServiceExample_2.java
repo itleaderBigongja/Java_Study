@@ -59,7 +59,7 @@ public class ExecutorServiceExample_2 {
 			System.out.println("Async task completed on " + Thread.currentThread().getName());
 		})    ;
 		
-		// 예외상태로 실행이 종료되었을 경우
+		//예외상태로 실행이 종료되었을 경우
 		CompletableFuture.supplyAsync(() -> {return 2000;}).thenApply(s -> {
 			return s;
 		}).exceptionally(null).whenComplete(null);
@@ -67,7 +67,7 @@ public class ExecutorServiceExample_2 {
 		// 정상적으로 실행이 종료 됐을 때
 		Runtime.getRuntime().addShutdownHook(new Thread() {
 			public void run() {
-
+				
 			}
 		});
 		
