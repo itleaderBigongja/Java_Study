@@ -3,7 +3,7 @@ package Lambda;
 import java.util.Arrays;
 import java.util.List;
 
-public class Lambda_2_ForEach {
+public class Lambda_2_forEach {
 	
 	public static void main(String[] args) {
 		
