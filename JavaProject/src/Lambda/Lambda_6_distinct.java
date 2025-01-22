@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 // distinct : 중복 제거
-public class Lambda_distinct {
+public class Lambda_6_distinct {
 
 	public static void main(String[] args) {
 		
