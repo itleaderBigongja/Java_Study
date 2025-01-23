@@ -26,7 +26,7 @@ public class Lambda_StreamAPI_Parallel_Streams {
 		
 		// [ 병렬 스트림으로 합계 계산 및 시간 측정 ] Integer::sum -> Integer 클래스의 sum()를 참조
 		long startTime2 = System.currentTimeMillis();						// 시작 시간 기록
-		long sum2		= numbers.parallelStream().reduce(0, Integer::sum); // 병렬 스트림 생성
+		long sum2		= numbers.parallelStream().reduce(0, Integer::sum); // 병렬 스트림 생성 후, 
 		long endTime2   = System.currentTimeMillis();						// 마지막 시간 기록
 		/** parallelStream() 메서드는 컬렉션을 병렬 스트림으로 변환
 		 *  기능 : 스트림의 각 요소들을 여러 개의 쓰레드에서 동시에 처리할 수 있게 합니다.
