@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /** 람다 표현식의 기본 개념
  *  람다 표현식은 익명 함수를 만드는 방법 -> 기존의 자바에서 메서드를 정의하려면 클래스 내부에 있어야 했지만,
@@ -22,8 +23,11 @@ public class Lambda_1_Comparator {
 		System.out.println("ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ 람다 표현식을 사용 하기 전 ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ");
 		sortBeforeLambda(names);
 		
-		System.out.println("ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ 람다 표현식을 사용 하기 후 ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ");
+		System.out.println("ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ 람다 표현식을 사용 하기 후( 정렬 ) ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ");
 		sortAfterLambda(names);
+		
+		System.out.println("ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ 람다 표현식을 사용 하기 후( 역순 정렬 ) ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ");
+		reverseAterLambda(names);
 	}
 	
 	// 람다 표현식 사용 전 : Comparator 익명 클래스 사용
@@ -42,9 +46,16 @@ public class Lambda_1_Comparator {
 		System.out.println("람다 사용 전 : 정렬된 이름 리스트 : " + names + "\n");
 	}
 	
-	// 람다 표현식 사용 후 : Comparator 구현을 람다 표현식으로 대체
+	// 람다 표현식 사용 후 : Comparator 구현을 람다 표현식으로 대체( 정렬 : sort )
 	public static void sortAfterLambda(List<String> names) {
 		Collections.sort(names, (s1, s2) -> s1.compareTo(s2)); // 람다 표현식 사용
-		System.out.println("람다 사용 후 : 정렬된 이름 리스트 : " + names);
+		System.out.println("람다 사용 후 : 정렬된 이름 리스트 : " + names + "\n");
+	}
+	
+	// 람다 표현식 사용 후 : Comparator 구현을 람다 표현식으로 대체( 역순 : Revers ) 
+	public static void reverseAterLambda(List<String> names) {
+		List<String> nameList = names.stream().sorted(Comparator.reverseOrder())
+									 .collect(Collectors.toList());
+		System.out.println("람다 사용 후 : 역순 정렬된 이름 리스트 : " + nameList);
 	}
 }
