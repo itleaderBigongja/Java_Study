@@ -30,7 +30,6 @@ public class Lambda_StreamAPI_FindWordInFile {
 							  .count();
 			System.out.println("내가 찾는 단어는 : " + targetWord + "이며, 단어의 개수는 " + count + "개 입니다.");
 		} catch (IOException e) {
-			// TODO: handle exception
 			System.err.println("Error reading file: " + e.getMessage());
 		}
 		
