@@ -10,7 +10,7 @@ public class Lambda_StreamAPI_Parallel_Streams {
 		
 		List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
 
-		// [ 순차 스트림으로 합계 계산 및 시간 측정 ]
+		// [ 순차 스트림으로 합계 계산 및 시간 측정 ] Integer::sum -> Integer 클래스의 sum()를 참조
 		long startTime1 = System.currentTimeMillis();				// 시작 시간 기록
 		long sum1       = numbers.stream().reduce(0, Integer::sum);	// 순차 스트림 생성 후, reduce 메서드로 합계 계산
 		long endTime1   = System.currentTimeMillis();				// 마지막 시간 기록
@@ -24,7 +24,7 @@ public class Lambda_StreamAPI_Parallel_Streams {
 		System.out.println("sum1 : " + sum1 + "\ntime : " + (endTime1 - startTime1)+"초");
 		
 		
-		// 병렬 스트림으로 합계 계산 및 시간 측정
+		// [ 병렬 스트림으로 합계 계산 및 시간 측정 ] Integer::sum -> Integer 클래스의 sum()를 참조
 		long startTime2 = System.currentTimeMillis();						// 시작 시간 기록
 		long sum2		= numbers.parallelStream().reduce(0, Integer::sum); // 병렬 스트림 생성
 		long endTime2   = System.currentTimeMillis();						// 마지막 시간 기록
