@@ -4,7 +4,7 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 
-public class CompletableFutureExample_1 {
+public class CompletableFutureExample_SupplyAsyncMethod {
 	/** supplyAsync() 메서드 개념
 	 *  람다 표현식 (또는 Supplier 인터페이스 구현체)을 비동기적으로 실행할 작업을 생성합니다. 즉, 현재 스레드와는 별도의 스레드에서 코드를 실행
 	 *  
