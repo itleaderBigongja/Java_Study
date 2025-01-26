@@ -75,5 +75,4 @@ public class CompletableFutureExample_SupplyAsyncMethod {
  *  상태 관리: CompletableFuture 비동기 작업 상태
  *  ㅇ 미완료(Incomplete) : 비동기 작업이 아직 완료되지 않은 상태
  *  ㅇ 완료(Completed)   : 비동기 작업이 성공적으로 완료된 상태
- * 
  */
