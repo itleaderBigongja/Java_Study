@@ -26,6 +26,8 @@ public class CompletableFutureExample_WhenComplete {
 			}
 		});
 		
+		future1.is
+		
 		
 		CompletableFuture<String> future2 = CompletableFuture.supplyAsync(() -> {
 			throw new RuntimeException("Error occurred!");
