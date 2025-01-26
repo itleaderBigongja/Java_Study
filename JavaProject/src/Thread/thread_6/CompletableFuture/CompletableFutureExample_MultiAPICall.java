@@ -1,4 +1,4 @@
-package Thread.thread_6;
+package Thread.thread_6.CompletableFuture;
 
 import java.net.URI;
 import java.net.http.HttpClient;
