@@ -47,41 +47,6 @@ public class ExecutorServiceExample_2 {
 			customExecutor.shutdownNow();
 		}
 		
-		// 2. CompletableFuture 예제
-		// 비동기 작업과 후속 작업을 실행하는 방법
-		CompletableFuture<Void> future = CompletableFuture.runAsync(() -> {
-			System.out.println("Async task started on " + Thread.currentThread().getName());
-			try {
-				Thread.sleep(3000);	// 비동기 작업
-			} catch (InterruptedException e) {
-				Thread.currentThread().interrupt();
-			}
-			System.out.println("Async task completed on " + Thread.currentThread().getName());
-		})    ;
-		
-		//예외상태로 실행이 종료되었을 경우
-		CompletableFuture.supplyAsync(() -> {return 2000;}).thenApply(s -> {
-			return s;
-		}).exceptionally(null).whenComplete(null);
-		
-		// 정상적으로 실행이 종료 됐을 때
-		Runtime.getRuntime().addShutdownHook(new Thread() {
-			public void run() {
-				
-			}
-		});
-		
-		// thenRun() : future 작업이 완료된 후 후속 작업을 실행합니다.
-		future.thenRun(() -> System.out.println("Follow-up task on" + Thread.currentThread().getName()));
-		 
-		try {
-			// CompletableFuture의 결과를 기다립니다. 작업이 완료될 때까지 호출한
-			// .get() : 스레드는 대기가 됩니다.
-			future.get();	// 결과 대기
-		} catch (Exception e) {
-			// TODO: handle exception
-		}
-		
 		// 3. Parallel Stream을 이용한 병렬 작업
 		// ㅇ 리스트를 병렬로 처리하여 각 요소에 대해 동시 작업을 수행합니다.
 		// ㅇ 실행 원리 : 내부적으로 Fork/Join Framework를 사용해 작업을 병렬로 나눕니다.

@@ -14,7 +14,7 @@ import java.util.concurrent.Future;
  *  Runnable : 작업 결과가 반환할 필요가 없을 때
  *  Callable : 작업 결과가 반환값이 필요할 때, 
  * */
-public class ExecutorServiceExample_5 {
+public class Executor_RunnableAndCallable {
 
 	public static void main(String[] args) {
 		

@@ -43,7 +43,7 @@ import java.util.concurrent.TimeUnit;
  *  3. 테스크 실행
  *  Runnable이나 Callable 작업을 스레드 풀에 제출하여 병렬로 실행할 수 있습니다.
  * */
-public class ExecutorServiceExample_1{
+public class Executor_FixedAndCachedAndSingle_ThreadPool{
 
 	public static void main(String[] args) {
 		

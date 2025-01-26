@@ -20,7 +20,7 @@ import java.util.concurrent.TimeUnit;
  *             delay == 지연 시간
  *             unit == 시간 단위(TimeUnit 객체)
  * */
-public class ExecutorServiceExample_6 {
+public class Executor_SchedulerExecutorService {
 
 	public static void main(String[] args) {
 		
