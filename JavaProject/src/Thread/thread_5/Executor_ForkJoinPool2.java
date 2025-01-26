@@ -11,14 +11,11 @@ import java.util.concurrent.TimeUnit;
 /** 스레드 풀(ThreadPool) 작업 단위 세분화 예제
  *  스레드 풀로 생성한 스레드 단위에서 ForkJoinPool을 사용하여 세분화 작업을 진행할 예정 
  */
-public class ExecutorServiceExample_4 {
+public class Executor_ForkJoinPool2 {
 	
 	// ForkJoinPool에서 실행할 작업 정의
 	static class SumTask extends RecursiveTask<Integer> {
 
-		/**
-		 * 
-		 */
 		private static final long serialVersionUID = 1L;
 		
 		private final int[] array;
