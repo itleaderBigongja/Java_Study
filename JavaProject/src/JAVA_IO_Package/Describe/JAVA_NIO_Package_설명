@@ -1,0 +1,28 @@
+JAVA I/O 패키지의 구성 요소
+
+java.nio ( New I/O, 비동기 I/O )
+ㅇ 채널과 버퍼를 기반으로 한다.
+ㅇ 동기적 및 비동기적 I/O를 모두 지원
+ㅇ Buffer, Channel, Selector와 같은 새로운 개념을 도입
+ㅇ 고성능 I/O 처리를 위해 설계
+
+
+-> 버퍼(Buffers) : 데이터를 일시적으로 저장하는 데 사용되는 객체
+   - ByteBuffer : 바이트 버퍼
+   - CharBuffer : 문자 버퍼
+   - (Int, Long, Float, Double) Buffer 등 다른 원시 타입 버퍼도 제공
+   
+-> 채널(Channels) : 데이터를 읽고 쓰는 데 사용되는 객체
+   - FileChannel : 파일에서 데이터를 읽거나 사용
+   - SocketChannel : 네트워크 소켓에서 데이터를 읽거나 사용
+   - ServerSocketChannel : 네트워크 서버 소켓을 관리 한다.
+   
+-> 셀렉터(Selector) : 여러 채널을 모니터링하여 준비된 채널에서만 작업을 수행할 수 있도록 한다.
+                     이를 통해 싱글 스레드로 여러 I/O 작업을 효율적으로 처리할 수 있다.
+                     
+-> 기타( Others)
+   - Path, Paths : 파일 시스템의 파일 및 디렉토리를 다루는 데 사용되는 클래스 및 인터페이스
+   - Files : 파일 복사, 삭제, 읽기 등 다양한 파일 작업에 사용되는 유틸리티 클래스
+   
+File NIO 패키지 역할
+-> 대규모 파일 처리, 네트워크 프로그래밍, 고성능 I/O 처리가 필요할 경우 적합하다.
