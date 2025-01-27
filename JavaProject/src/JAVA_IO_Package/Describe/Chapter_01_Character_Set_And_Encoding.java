@@ -1,4 +1,4 @@
-package JAVA_IO_Package;
+package JAVA_IO_Package.Describe;
 
 // Java I/O 패키지를 공부하기 전에 반드시 알아야 할 내용
 public class Chapter_01_Character_Set_And_Encoding {
