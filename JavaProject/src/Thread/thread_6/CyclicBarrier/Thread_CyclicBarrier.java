@@ -3,8 +3,6 @@ package Thread.thread_6.CyclicBarrier;
 import java.util.concurrent.BrokenBarrierException;
 import java.util.concurrent.CyclicBarrier;
 
-import jdk.internal.org.jline.terminal.TerminalBuilder.SystemOutput;
-
 /** CyclicBarrier 메서드
  *  [개념] 
  *  여러 스레드가 특정 지점에 도달할 때까지 서로를 기다리도록 하는 동기화 도구
