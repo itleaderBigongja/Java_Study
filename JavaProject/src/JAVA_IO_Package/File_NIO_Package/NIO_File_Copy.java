@@ -10,8 +10,8 @@ public class NIO_File_Copy {
 	public static void main(String[] args) {
 		
 		// 복사할 원본 파일 경로
-		String sourceFile = "src/fileDir/sourceFile/copy_example_source.txt";
-		String destFile = "src/fileDir/destinationFile/copy_nio_example_destination.txt";
+		String sourceFile = "src/fileDir/sourceFileDir/copy_example_source.txt";
+		String destFile = "src/fileDir/destinationFileDir/copy_nio_example_destination.txt";
 		
 		// try-with-resources 구문: 자원을 자동으로 해제해주는 구문
 		// 사용 이유: FileChannel을 사용한 후, 자동으로 close()를 호출하여 자원 누수를 방지하기 위해 사용

@@ -9,10 +9,10 @@ public class IO_File_Copy {
 	public static void main(String[] args) {
 		
 		// 복사할 원본 파일 경로(source : 출발지)
-		String sourceFile = "src/fileDir/sourceFile/copy_example_source.txt";
+		String sourceFile = "src/fileDir/sourceFileDir/copy_example_source.txt";
 		
 		// 복사될 대상 파일 경로(destination : 목적지)
-		String destFile = "src/fileDir/destinationFile/copy_example_destination.txt";
+		String destFile = "src/fileDir/destinationFileDir/copy_example_destination.txt";
 		
 		// try-with-resources 구문: 자원을 자동으로 해제해주는 구문
 		// 사용 이유: FileInputStream, FileOutputStream을 사용한 후, 
