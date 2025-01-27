@@ -1,4 +1,4 @@
-package JAVA_IO_Package.File_IO;
+package JAVA_IO_Package.File_IO_Package;
 
 import java.io.BufferedReader;
 import java.io.FileReader;

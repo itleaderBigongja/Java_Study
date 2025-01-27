@@ -1,4 +1,4 @@
-package JAVA_IO_Package.File_NIO;
+package JAVA_IO_Package.File_NIO_Package;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
