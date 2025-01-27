@@ -8,21 +8,22 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 
-public class NIO_File_Reader {
+public class NIO_FileChannel_Open {
 
 	public static void main(String[] args) {
-		 // try-with-resources 구문: 자원을 자동으로 해제해주는 구문
+		// try-with-resources 구문: 자원을 자동으로 해제해주는 구문
         // 사용 이유: FileChannel을 사용한 후 자동으로 close()를 호출하여 자원 누수를 방지하기 위해 사용
         try (
              // FileChannel: 파일에서 데이터를 읽고 쓰는 데 사용하는 채널
-            // 사용 이유: 지정된 파일에서 데이터를 읽어오기 위해 사용
+             // 사용 이유: 지정된 파일에서 데이터를 읽어오기 위해 사용
              FileChannel channel = FileChannel.open(Paths.get("src/fileDir/sample_1.txt"), StandardOpenOption.READ)
              
          ) {
            // ByteBuffer: 데이터를 일시적으로 저장하는 버퍼, 여기서는 바이트 버퍼
            // 사용 이유: 파일에서 읽어들인 데이터를 임시로 저장하기 위해 사용
            ByteBuffer buffer = ByteBuffer.allocate(1024); // 1024 byte 크기의 버퍼 생성
-            // while 루프: 파일 채널에서 데이터를 읽어 버퍼에 저장하고, 더 이상 읽을 데이터가 없을 때까지 반복
+
+           // while 루프: 파일 채널에서 데이터를 읽어 버퍼에 저장하고, 더 이상 읽을 데이터가 없을 때까지 반복
            while(channel.read(buffer) > 0){ // 파일 채널에서 읽은 바이트 수를 확인하고, 0보다 크면 데이터가 있는 것으로 간주
         	   
         	   // ByteBuffer.flip(): 읽기 모드로 버퍼를 준비
@@ -50,7 +51,7 @@ public class NIO_File_Reader {
                }
             }
         } catch (IOException e) {
-            // IOException: I/O 작업 중 발생하는 예외를 처리하는 클래스
+           // IOException: I/O 작업 중 발생하는 예외를 처리하는 클래스
            // 사용 이유: 파일 입출력 시 발생할 수 있는 예외를 처리하기 위해 사용
            System.out.println(e.getMessage()); // 예외 메시지를 콘솔에 출력
         }
