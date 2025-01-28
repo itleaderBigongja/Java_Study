@@ -16,7 +16,9 @@ import java.nio.file.StandardOpenOption;
 //클래스 버전 관리: 클래스 변경 시 역직렬화 오류 방지
 	
 class PersonNIO implements Serializable {
-private static final long serialVersionUID = 1L;
+
+	// 직렬화 설명 : fileDir/serializable/Serializable_Describe 파일에 있음
+	private static final long serialVersionUID = 1L;
 	
 	String name; // 이름
 	int age;	 // 나이
@@ -38,7 +40,7 @@ public class NIO_File_Serializable {
 	
 	public static void main(String[] args) {
 		// 직렬화된 객체를 저장할 파일 경로
-		String file = "src/fileDir/person_nio.dat";
+		String file = "src/fileDir/serializable/person_nio.dat";
 		// 파일 경로를 Path 객체로 변환
 		Path path   = Paths.get(file);
 		

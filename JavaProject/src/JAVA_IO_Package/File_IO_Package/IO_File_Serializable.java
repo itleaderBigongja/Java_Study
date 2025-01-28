@@ -32,7 +32,7 @@ public class IO_File_Serializable {
 	public static void main(String[] args) {
 		
 		// 직렬화된 객체를 저장할 파일 경로
-		String file = "src/fileDir/person_io.dat";
+		String file = "src/fileDir/serializable/person_io.dat";
 		
 		// try-with-resources 구문: 자원을 자동으로 해제해주는 구문
 		// 사용 이유: FileOutputStream, ObjectOutputStream을 사용한 후,
