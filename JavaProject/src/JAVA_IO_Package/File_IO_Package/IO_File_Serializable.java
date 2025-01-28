@@ -21,6 +21,7 @@ class Person implements Serializable{
 		this.age  = age;
 	}
 	
+	// toString() 메서드: 객체 정보를 문자열로 반환(디버깅 용이)
 	@Override
 	public String toString() {
 		return "Person{" + "name" + name + "age" + age + "}";
