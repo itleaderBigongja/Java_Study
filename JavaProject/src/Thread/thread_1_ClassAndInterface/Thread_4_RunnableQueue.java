@@ -28,7 +28,7 @@ class TaskProcessor implements Runnable {
 			synchronized (taskQueue) {
 				if(!taskQueue.isEmpty()) {
 					
-					// 큐에서 작업 가져오 
+					// 큐에서 작업 가져오기
 					task = taskQueue.poll();
 				}
 			}
