@@ -1,3 +1,6 @@
+[ 실제 REST API 프로젝트는 경로 ]
+경로 : /Users/bigongja/eclipse-springboot-workspace
+
 
 [ REST_Full 이란 무엇인가? ]
 -> RESTFull_API는 REST(Representational State Transfer) 원칙을 따르는
@@ -156,7 +159,7 @@ RESTFul API의 특징
    		"name":"Jane Doe",
    		"email": "jane.doe@example.com"
    }
-   
+  
  -> 사용자 정보 수정
    ㅇ PUT /users/123 또는 PATCH /users/123
    ㅇ 요청(JSON)
