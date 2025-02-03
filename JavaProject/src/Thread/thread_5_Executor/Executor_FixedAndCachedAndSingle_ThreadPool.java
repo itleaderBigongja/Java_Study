@@ -47,7 +47,7 @@ public class Executor_FixedAndCachedAndSingle_ThreadPool{
 
 	public static void main(String[] args) {
 		
-		/** Fixed Thread Pool
+		/** newFixedThreadPool
 		 *  ㅇ 고정된 스레드 수로 동작하는 스레드 풀(Thread Pool)을 생성합니다.
 		 *  ㅇ 모든 스레드가 바쁠 경우, 작업은 큐(Queue)에 저장됩니다.
 		 *    -> 생성한 스레드 3개가 모두 작업을 진행 시, 남은 작업은 Queue에 보관
@@ -55,33 +55,33 @@ public class Executor_FixedAndCachedAndSingle_ThreadPool{
 		ExecutorService fixedThreadPool = Executors.newFixedThreadPool(3);
 		
 		try {
-			// Future 객체
-			// 비동기 작업의 결과를 나타내는데 사용
-			// 작업이 완료될 때까지 기다리거나 결과를 가져올 수 있는 매커니즘을 제공
-			// Future 인터페이스는 주로 Java의 병렬 처리와 관련된 기능에서 사용
+			/** Future 객체 
+			 *  ㅇ 비동기 작업의 결과를 나타내는데 사용
+			 *  ㅇ 작업이 완료될 때까지 기다리거나 결과를 가져올 수 있는 매커니즘을 제공
+			 *  ㅇ Future 인터페이스는 주로 Java의 병렬 처리와 관련된 기능에서 사용
+			 *  
+			 *  submit() 메서드로 작업 제출
+			 *  ㅇ 작업을 제출하고, 작업의 결과를 Future 객체로 반환받습니다.
+			 **/ 
 			Future<String> result1 = fixedThreadPool.submit(() -> {
-				// 첫 번째 스레드가 작업을 처리한 내용 처리하고 결과를 리턴함
-				Thread.sleep(1000);	// 작업 시뮬레이션
+				Thread.sleep(1000);
 				return "Result from Task 1";
 			});
 			
-			// submit() 메서드로 작업 제출
-			// ㅇ 작업을 제출하고, 작업의 결과를 Future 객체로 반환받습니다.
 			Future<String> result2 = fixedThreadPool.submit(() -> {
-				// 두 번째 스레드가 작업을 처리한 내용 처리하고 결과를 리턴함
 				Thread.sleep(1000);
 				return "Result from Task 2";
 			});
 			
 			Future<String> result3 = fixedThreadPool.submit(() -> {
-				// 세 번째 스레드가 작업을 처리한 내용 처리하고 결과를 리턴함
 				Thread.sleep(1000);
 				return "Result from Task 3";
 			});
 			
-			// get() : Blocking 메서드
-			// get()메서드를 호출하면 작업이 완료될 때까지 현재 스레드가 블록됩니다.
-			// 작업이 이미 완료된 경우 결과를 즉시 반환합니다.
+			/** get() : Blocking 메서드 
+			 *  ㅇ get()메서드를 호출하면 작업이 완료될 때까지 현재 스레드가 블록됩니다.
+			 *  ㅇ 작업이 이미 완료된 경우 결과를 즉시 반환합니다.
+			 **/ 
 			System.out.println("첫 번째 스레드 작업 상태 : " + result1.isDone() + " 작업결과 : " + result1.get());
 			System.out.println("두 번째 스레드 작업 상태 : " + result2.isDone() + " 작업결과 : " + result2.get());
 			System.out.println("세 번째 스레드 작업 상태 : " + result3.isDone() + " 작업결과 : " + result3.get());
@@ -91,7 +91,7 @@ public class Executor_FixedAndCachedAndSingle_ThreadPool{
 			fixedThreadPool.shutdown();	// 스레드 풀 종료
 		}
 		
-		/** 2. Cached Thread Pool
+		/** 2. newCachedThreadPool
 		 *  ㅇ 필요할 때 스레드를 생성하고, 사용하지 않으면 스레드를 종료합니다.
 		 *  ㅇ 적은 작업량에는 자원을 절약하고, 큰 작업량에는 유연하게 대처할 수 있습니다.
 		 *  ㅇ invokeAll() 메서드 사용 예제
@@ -107,6 +107,7 @@ public class Executor_FixedAndCachedAndSingle_ThreadPool{
 			// invokeAll() : 여러 작업을 동시에 제출하고, 결과를 기다립니다.
 			List<Future<String>> results = cachedThreadPool.invokeAll(tasks);
 			for(Future<String> result : results) {
+				// get() : 작업이 완료될 때까지 현재 스레드 블록처리 후, 작업이 완료되면 결과를 즉시 반환한다.
 				System.out.println("invokeAll Result : " +result.get());
 			}
 		} catch (InterruptedException | ExecutionException e) {
@@ -115,7 +116,7 @@ public class Executor_FixedAndCachedAndSingle_ThreadPool{
 			cachedThreadPool.shutdown();
 		}
 		
-		/** Single Thread Executor
+		/** SingleThreadExecutor
 		 *  ㅇ 단일 스레드로 동작하며, 작업은 순차적으로 실행됩니다.
 		 *  ㅇ invokeAny() 메서드 사용예제
 		 */ 

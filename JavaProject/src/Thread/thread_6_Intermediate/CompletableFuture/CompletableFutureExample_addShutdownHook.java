@@ -27,7 +27,12 @@ public class CompletableFutureExample_addShutdownHook {
 		 *  사용 이유: JVM의 런타임 환경에 접근하기 위해 Runtime 객체를 얻음
 		 *  
 		 *  Runtime.addShutdownHook(Thread hook): JVM 종료 시 실행될 스레드를 등록
-		 *  사용 이유: 프로그램 종료 시 특정 작업을 실행하기 위해 종료 후크 스레드를 등록 */
+		 *  사용 이유: 프로그램 종료 시 특정 작업을 실행하기 위해 종료 후크 스레드를 등록 
+		 *  
+		 *  JVM 종료 시점 :
+		 *  ㅇ 프로그램의 main() 메서드가 종료될 때( 모든 비 데몬 스레드가 종료되었을 때 )
+		 *  ㅇ System.exit() 메서드를 명시적으로 호출할 때
+		 *  ㅇ 운영채ㅔ제에서 JVM 프로세스를 강제 종료할 때( 예 : Ctrl + C, 터미널 종료 )*/
 		Runtime.getRuntime().addShutdownHook(new Thread(() -> {
 			System.out.println("종료 후크 스레드 시작...");
 			
@@ -45,9 +50,10 @@ public class CompletableFutureExample_addShutdownHook {
 				}
 			}, executor);
 			
-			// CompletableFuture.supplyAsync(Supplier<U> supplier, Executor executor)
-			// -> 주어진 작업을 스레드 풀에서 비동기적으로 실행하고 결과를 반환
-			// 사용 이유: 비동기적으로 코드를 실행하고 결과를 반환하는 종료 작업을 정의
+			/** CompletableFuture.supplyAsync(Supplier<U> supplier, Executor executor)
+			 *  -> 주어진 작업을 스레드 풀에서 비동기적으로 실행하고 결과를 반환
+			 *     사용 이유: 비동기적으로 코드를 실행하고 결과를 반환하는 종료 작업을 정의
+			 **/
 			CompletableFuture<Void> shutdownTask2 = CompletableFuture.supplyAsync(() -> {
 				
 				try {
@@ -73,16 +79,18 @@ public class CompletableFutureExample_addShutdownHook {
 			}, executor);
 			
 			
-			// CompletableFuture.allOf(CompletableFuture<?>... future)
-			// -> 모든 CompletableFuture가 완료되면 완료되는 CompletableFuture 생성
-			// 사용 이유: 모든 비동기 작업이 완료될 때까지 기다리기 위해 사용
+			/** CompletableFuture.allOf(CompletableFuture<?>... future)
+			 *  -> 모든 CompletableFuture가 완료되면 완료되는 CompletableFuture 생성
+			 *     사용 이유: 모든 비동기 작업이 완료될 때까지 기다리기 위해 사용
+			 **/
 			CompletableFuture<Void> allTasks = CompletableFuture.allOf(shutdownTask1, shutdownTask2, shutdownTask3);
 			
 			try {
-				// orTimeout(long timeout, TimeUnit unit):
-				// -> 지정된 시간 안에 작업이 완료되지 않으면 TimeoutException 발생시키는 메서드
-				// 사용 이유: 작업 시간이 너무 길어질 경우 타임아웃 처리
-				// join(): 결과를 반환하지 않고 작업이 완료될 때까지 대기하는 메서드
+				/** orTimeout(long timeout, TimeUnit unit): 
+				 *  -> 지정된 시간 안에 작업이 완료되지 않으면 TimeoutException 발생시키는 메서드
+				 *     사용 이유: 작업 시간이 너무 길어질 경우 타임아웃 처리
+				 *     join(): 결과를 반환하지 않고 작업이 완료될 때까지 대기하는 메서드
+				 **/
 				allTasks.orTimeout(5, TimeUnit.SECONDS).join();
 				System.out.println("모든 종료 작업 완료");
 			} catch (Throwable e4) {

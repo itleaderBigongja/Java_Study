@@ -39,7 +39,7 @@ public class Executor_ForkJoinPool2 {
 		 *  
 		 *  직접 호출 가능
 		 *  ㅇ 작업 분할이 필요 없는 경우, compute()를 호출해 동기적으로 작업을 수행합니다.
-		 * */
+		 **/
 		@Override
 		protected Integer compute() {
 			if(end - start <= 5) { // 작은 작업이면 직접 계산
@@ -115,12 +115,13 @@ public class Executor_ForkJoinPool2 {
 				//           RecursiveTask 또는 RecursiveAction과 같은 작업을
 				//			 ForkJoinPool에 제출하고, 그 결과를 즉시 반환받고 싶을 때 사용
 				
-				// invoke 동기적 실행
-				// ㅇ invoke()는 작업이 완료될 때까지 호출한 스레드를 블록(block)합니다.
-				// ㅇ 작업이 완료되면 결과를 반환하거나, 예외가 발생한 경우 예외를 던집니다.
-				// ㅇ 내부적으로 작업-도난(work-stealing) 알고리즘을 사용하여 작업을 병렬로 처리
-				// ㅇ 큰 작업을 작은 작업으로 나누고(fork), 각 결과를 병합(join)하여 최종 결과를 생성
-				// ㅇ 예외처리 : 작업 중 예외가 발생하면 'RuntimeException'으로 래핑되어 호출자에게 전달
+				/** invoke 동기적 실행
+				 *  ㅇ invoke()는 작업이 완료될 때까지 호출한 스레드를 블록(block)합니다.
+				 *  ㅇ 작업이 완료되면 결과를 반환하거나, 예외가 발생한 경우 예외를 던집니다.
+				 *  ㅇ 내부적으로 작업-도난(work-stealing) 알고리즘을 사용하여 작업을 병렬로 처리
+				 *  ㅇ 큰 작업을 작은 작업으로 나누고(fork), 각 결과를 병합(join)하여 최종 결과를 생성
+				 *  ㅇ 예외처리 : 작업 중 예외가 발생하면 'RuntimeException'으로 래핑되어 호출자에게 전달
+				 **/ 
 				int result = 0;
 				try {
 					result = forkJoinPool.invoke(task);
@@ -135,7 +136,7 @@ public class Executor_ForkJoinPool2 {
 		try {
 			threadPool.awaitTermination(1, TimeUnit.MINUTES);
 		} catch (Exception e) {
-			// TODO: handle exception
+			throw new RuntimeException(e);
 		} finally {
 			threadPool.shutdown();
 		}

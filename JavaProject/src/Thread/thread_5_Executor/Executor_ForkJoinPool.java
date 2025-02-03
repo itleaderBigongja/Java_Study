@@ -9,21 +9,21 @@ public class Executor_ForkJoinPool {
 
 	public static void main(String[] args) {
 		
-		// ForkJoinPool 예제
-		// ForkJoinPool을 사용하여 병렬 계산 작업을 효율적으로 처리.
-		// RecursiveTask를 구현하여 재귀적으로 작업을 분할(fork)하고 병합(join).
-		ForkJoinPool forkJoinPool = new ForkJoinPool(4);	// 병렬 레벨 4로 설정
-		ForkJoinTask<Integer> sumTask = forkJoinPool.submit(new RecursiveSumTask(1, 100));
+		/** ForkJoinPool
+		 *  ㅇ ForkJoinPool을 사용하여 병렬 계산 작업을 효율적으로 처리.
+		 *  ㅇ RecursiveTask를 구현하여 재귀적으로 작업을 분할(fork)하고 병합(join).
+		 **/
+		ForkJoinPool forkJoinPool = new ForkJoinPool(4);									// 병렬 레벨 4로 설정
+		ForkJoinTask<Integer> sumTask = forkJoinPool.submit(new RecursiveSumTask(1, 100));	// (시작값, 마지막값)
 		
 		try {
 			System.out.println("ForkJoinPool Result : " + sumTask.get());
 		} catch (InterruptedException | ExecutionException e) {
-			e.printStackTrace();
+			throw new RuntimeException(e);
 		} finally {
 			forkJoinPool.shutdown();
 		}
 	}
-
 }
 
 // Fork/Join Framework를 활용한 RecursiveTask 구현
