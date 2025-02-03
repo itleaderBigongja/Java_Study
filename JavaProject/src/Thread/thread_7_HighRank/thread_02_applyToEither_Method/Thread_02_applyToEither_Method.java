@@ -1,4 +1,4 @@
-package Thread.thread_7_HighRank.thread_02_applyToEither;
+package Thread.thread_7_HighRank.thread_02_applyToEither_Method;
 
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.TimeUnit;

@@ -1,4 +1,4 @@
-package Thread.thread_7_HighRank.thread_01_acceptEitherMethod;
+package Thread.thread_7_HighRank.thread_01_acceptEither_Method;
 
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.TimeUnit;
