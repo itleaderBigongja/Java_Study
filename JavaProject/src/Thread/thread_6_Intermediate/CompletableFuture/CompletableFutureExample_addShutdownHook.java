@@ -5,6 +5,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
+import java.util.concurrent.locks.ReentrantLock;
 
 public class CompletableFutureExample_addShutdownHook {
 	
@@ -32,23 +33,40 @@ public class CompletableFutureExample_addShutdownHook {
 		 *  JVM 종료 시점 :
 		 *  ㅇ 프로그램의 main() 메서드가 종료될 때( 모든 비 데몬 스레드가 종료되었을 때 )
 		 *  ㅇ System.exit() 메서드를 명시적으로 호출할 때
-		 *  ㅇ 운영채ㅔ제에서 JVM 프로세스를 강제 종료할 때( 예 : Ctrl + C, 터미널 종료 )*/
+		 *  ㅇ 운영채제에서 JVM 프로세스를 강제 종료할 때( 예 : Ctrl + C, 터미널 종료 )
+		 *  
+		 *  addShutdownHook() 주의사항
+		 *  addShutdownHook()는 주 스레드가 죽기 직전 마지막 호출을 하기 때문에 비동기 작업을 하면 안된다.
+		 *  비동기 작업은 다른 곳에서 호출을 하여 실행을 해주는건데 주 스레드가 죽은 후에 호출이 될 수도 있고,
+		 *  addShutdownHook()은 마지막으로 자원을 정리하는 용도로 사용하는거지 억지로 다른것을 끼워맞추면 안된다. */
 		Runtime.getRuntime().addShutdownHook(new Thread(() -> {
+			// addShutdownHook ( 얘는 무조건 동기로 )
 			System.out.println("종료 후크 스레드 시작...");
 			
+			try {
+				TimeUnit.SECONDS.sleep(2);
+				System.out.println("종료 작업 1 완료");
+			} catch (InterruptedException e) {
+				// 다른 스레드를 깨운다. ( 본인 스레드를 본인이 깨울수없다 )
+				Thread.currentThread().interrupt();
+				System.out.println("종료 작업 1 예외 발생: " + e.getMessage());
+			}
+			
+			
+			// addShutdownHook의 잘못된 예( 비동기로 실행을 하면 안되기 때문.. )
 			/** 3. 비동기 종료 작업 정의 및 실행
 			 *  CompletableFuture<Void>: 결과를 반환하지 않는 비동기 작업 결과를 나타내는 객체
 			 *  CompletableFuture.runAsync(Runnable action, Executor executor): 주어진 작업을 스레드 풀에서 비동기적으로 실행 */
 			CompletableFuture<Void> shutdownTask1 = CompletableFuture.runAsync(() -> {
-				
 				try {
 					TimeUnit.SECONDS.sleep(2);
 					System.out.println("종료 작업 1 완료");
 				} catch (InterruptedException e) {
+					// 다른 스레드를 깨운다. ( 본인 스레드를 본인이 깨울수없다 )
 					Thread.currentThread().interrupt();
 					System.out.println("종료 작업 1 예외 발생: " + e.getMessage());
 				}
-			}, executor);
+			});
 			
 			/** CompletableFuture.supplyAsync(Supplier<U> supplier, Executor executor)
 			 *  -> 주어진 작업을 스레드 풀에서 비동기적으로 실행하고 결과를 반환
@@ -56,6 +74,7 @@ public class CompletableFutureExample_addShutdownHook {
 			 **/
 			CompletableFuture<Void> shutdownTask2 = CompletableFuture.supplyAsync(() -> {
 				
+				/** 배치 처럼 잡으로 묶어서 하기 위해서 쓰는 것 */ 
 				try {
 					TimeUnit.SECONDS.sleep(3);
 					System.out.println("종료 작업 2 완료");
@@ -81,7 +100,7 @@ public class CompletableFutureExample_addShutdownHook {
 			
 			/** CompletableFuture.allOf(CompletableFuture<?>... future)
 			 *  -> 모든 CompletableFuture가 완료되면 완료되는 CompletableFuture 생성
-			 *     사용 이유: 모든 비동기 작업이 완료될 때까지 기다리기 위해 사용
+			 *     사용 이유: 모든 비동기 작업이 완료될 때까지 기다리기 위해 사용 
 			 **/
 			CompletableFuture<Void> allTasks = CompletableFuture.allOf(shutdownTask1, shutdownTask2, shutdownTask3);
 			

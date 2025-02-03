@@ -30,7 +30,7 @@ public class CompletableFutureExample_MultiAPICall {
         List<CompletableFuture<String>>
         		// URL 리스트를 스트림으로 변환( 스트림 API )
         		futures = urls.stream()
-        				// 각 URL을 순회하면서 다음 작업을 수행
+        					  // 각 URL을 순회하면서 다음 작업을 수행
 							  .map(url ->
 							  	   // 각 URL에 대한 비동기 작업 생성( 스레드 풀 사용 )
 							  	   CompletableFuture.supplyAsync(() -> fetchUrlContent(url))  

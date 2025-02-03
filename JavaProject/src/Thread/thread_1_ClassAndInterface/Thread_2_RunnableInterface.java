@@ -46,7 +46,6 @@ public class Thread_2_RunnableInterface {
 		thread_1.start();
 		thread_2.start();
 		
-		
 		// 생성했던 thread_1과 thread_2의 상태가 완료된 상태가 아니라면 while 루프
 		while (!"TERMINATED".equalsIgnoreCase(String.valueOf(thread_1.getState()))
 				&& !"TERMINATED".equalsIgnoreCase(String.valueOf(thread_2.getState()))) {

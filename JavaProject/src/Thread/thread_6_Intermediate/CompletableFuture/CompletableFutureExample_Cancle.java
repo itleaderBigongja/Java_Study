@@ -13,11 +13,11 @@ import java.util.concurrent.TimeUnit;
  *  isCancelled()
  *  이 메서드는 비동기 작업이 취소되었는지 여부를 확인
  *  */ 
-public class CompletableFutureExample_isCompleted {
+public class CompletableFutureExample_Cancle {
 
 	public static void main(String[] args) {
 		
-		System.out.println("isCompleted() 예제 시작!...");
+		System.out.println("isCompleted() 예제 시작!...\n");
 		
 		CompletableFuture<String> future = CompletableFuture.supplyAsync(() -> {
 			
@@ -32,18 +32,20 @@ public class CompletableFutureExample_isCompleted {
 		});
 		
 		// 작업 완료 후, 여부
-		System.out.println("[ 작업 시작 후, 완료 여부 ]:" + future.isDone());
+		System.out.println("[ 작업 시작 후, 완료 여부 ] : " + future.isDone());
+		
 		
 		CompletableFuture<String> failedFuture = CompletableFuture.supplyAsync(() -> {
 			throw new RuntimeException("Error Occured");
 		}).exceptionally(throwable -> "Fallback").thenApply(String::valueOf);
-		System.out.println("[ 예외 발생 후 완료 여부 ]:" + failedFuture.isDone());
+		System.out.println("[ 예외 발생 후 완료 여부 ] : " + failedFuture.isDone());
 		// 작업 완료 대기
 		failedFuture.join();
 		
+		
 		CompletableFuture<String> canceledFuture = new CompletableFuture<>();
 		canceledFuture.cancel(true);
-		System.out.println("[ 취소 완료 여부 ]:" + canceledFuture.isDone());
+		System.out.println("[ 취소 완료 여부 ] : " + canceledFuture.isDone());
 		
 		System.out.println("isDone() 예제 종료!");
 	}
