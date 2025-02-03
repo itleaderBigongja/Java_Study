@@ -13,7 +13,7 @@ import java.util.function.Supplier;
  *        
  *  completeAsync() 메서드가 필요한 상황
  *  외부 비동기 작업 완료 : 외부에서 실행되는 비동기 작업( 예 : API 호출, 데이터베이스 쿼리)이 완료되었을 때
- *                     해당 결과를 CompletableFuture에 설정해야할 때
+ *                     해당 결과를 CompletableFuture에 설정 해야할 때
  *                     
  *  결과 지연 처리 : 특정 조건이 만족되었을 때, CompletableFuture의 결과를 설정하고 싶을 때
  *  
