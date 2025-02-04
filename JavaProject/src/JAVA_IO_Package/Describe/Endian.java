@@ -3,7 +3,7 @@ package JAVA_IO_Package.Describe;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 
-public class Endianness {
+public class Endian {
 
 	public static void main(String[] args) {
         // 테스트할 정수

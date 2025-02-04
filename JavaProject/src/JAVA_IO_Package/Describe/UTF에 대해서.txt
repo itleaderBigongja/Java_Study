@@ -44,7 +44,7 @@ UTF는 유니코드 문자 집합의 문자를 실제로 컴퓨터에 저장하�
 [ UTF-16BE와 UTF-16LE를 배우기 전 바이트 순서(Byte Order)를 먼저 공부해야 한다. ]
 1. 바이트 순서( Byte Order ):
  ㅇ 컴퓨터는 데이터를 메모리에 저장할 때, 여러 바이트로 이루어진 값을 저장하는 순서가 다를 수 있다.
-    이를 바이트 순서(ByteOrder) 또는 엔디안(Endianness)라고 한다.
+    이를 바이트 순서(ByteOrder) 또는 엔디안(Endian)라고 한다.
  
  ㅇ 빅 엔디안( Big_Endian ): 상위 바이트( Most Significant Byte, MSB)부터 낮은 주소에서부터 저장하는 방식이다.
                           사람이 숫자를 읽는 방식과 동일하다.
@@ -63,13 +63,13 @@ UTF는 유니코드 문자 집합의 문자를 실제로 컴퓨터에 저장하�
      					  0x1002	0x34
      					  0x1003	0x12
      					  
-2. UTF-16BE ( Endian : Big_Endian )
+2. UTF-16BE ( Big_Endian )
  ㅇ UTF-16 인코딩에서 16비트 코드 단위를 빅 엔디안 방식으로 저장하는 방식이다.
  ㅇ 상위 바이트부터 먼저 주소(낮은)에 저장한다.
  ㅇ BOM : FE FF
  ㅇ 예: 유니코드 문자 U+1234를 UTF-16BE로 저장하면 12 34 순서로 저장된다.
  
-3. UTF-16LE ( Endian : Little_Endian )
+3. UTF-16LE ( Little_Endian )
  ㅇ UTF-16 인코딩에서 16비트 코드 단위를 리틀 엔디안 방식으로 저장하는 방식이다.
  ㅇ 하위 바이트부터 먼저 주소(낮은)에 저장한다.
  ㅇ BOM : FF FE
