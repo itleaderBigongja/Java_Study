@@ -59,5 +59,8 @@ public class IO_File_Reader {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		String s = "한";
+		System.out.println(s.getBytes("UTF-8").length);
 	}
 }
