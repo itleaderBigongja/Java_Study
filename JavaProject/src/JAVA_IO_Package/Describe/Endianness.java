@@ -12,7 +12,7 @@ public class Endianness {
         // ByteBuffer 생성 (4바이트, Integer 크기)
         ByteBuffer buffer = ByteBuffer.allocate(4);
 
-        // 시스템의 기본 바이트 순서 확인( LITTLE_ENDIAN )
+        /** 시스템의 기본 바이트 순서 확인( default : LITTLE_ENDIAN )*/
         ByteOrder nativeOrder = ByteOrder.nativeOrder();
         System.out.println("시스템의 기본 바이트 순서: " + nativeOrder);
 
