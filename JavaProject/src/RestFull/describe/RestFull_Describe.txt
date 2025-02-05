@@ -5,23 +5,22 @@
 [ REST_Full 이란 무엇인가? ]
 -> RESTFull_API는 REST(Representational State Transfer) 원칙을 따르는
    API(Application Programming Interface)를 의미한다.
-   
+
    REST는 소프트웨어 아키텍처 스타일 중 하나로, 네트워크 기반의 분산 시스템을 설계하는 데
    사용되는 일련의 제약조건들을 정의한다.
-   
+
 
 [ REST의 핵심 원칙 ]
-
 1. < 클라이언트-서버( Client-Server )
 -> 클라이언트와 서버는 서로 독립적으로 개발될 수 있어야 한다.
    클라이언트는 서버의 구현 세부 사항에 의존하지 않아야 하며, 
    서버 또한 클라이언트의 동작 방식에 영향을 받지 않아야 한다.
-   
+
 -> 클라이언트는 요청(Request)을 보내고, 서버는 응답(Response)을 제공하는 
    명확한 역할 분담이 이루어져야 한다.
 
 
-2. < 무상태성( Stateless )
+2. < 무상태성( Stateless ) >
 -> 각각의 클라이언트 요청은 독립적으로 처리되어야 한다.
    서버는 클라이언트 이전 요청 정보를 기억하지 않아야 한다.
    
@@ -49,17 +48,17 @@
 -> 인터페이스 일관성을 위해 다음 4가지 제약 조건을 따른다.
     ㅇ 리소스(자원) 식별( Resource Identification)
        - 각 리소스는 고유한 URI(Uniform Resource Identifier)로 식별되어야 한다.
-    
+
     ㅇ 요청을 통한 리소스 조작( Resource Manipulation through Representation)
        - 클라이언트는 서버가 제공하는 리소스 표현(representiation)을 통해 리소스를 조작해야 한다.
-    
+
     ㅇ 자기 기술 메시지(Self-Descriptive Message)
        - 요청과 응답 메시지는 필요한 모든 정보를 포함해야 하며, 
          메시지만으로 메시지의 의미를 파악할 수 있어야 한다.
-    
+
     ㅇ 하이퍼미디어 기반 상태 엔진(Hypermedia As The Engin Of Application State)
        - 서버는 클라이언트에게 다음 단계를 안내할 수 있는 하이퍼링크를 제공해야 한다.
-       
+
 6. 코드 온 디맨드(Code-On-Demand)[선택적]
 -> 서버에서 클라이언트에게 실행 가능한 코드를 전송하여 클라이언트의 기능을 확장할 수 있다[선택적]
 -> 클라이언트가 필요에 따라 서버에서 코드를 받아 실행하는 방식이다.
@@ -74,21 +73,21 @@ RESTFul API의 특징
    - PUT : 리소스 전체 수정
    - PATCH : 리소스 일부 수정
    - DELETE : 리소스 삭제
-   
+
 ㅇ JSON 또는 XML 형식의 데이터 사용
    - 클라이언트와 서버 간의 데이터 교환을 위해 JSON 형식을 사용한다.(XML도 가능)
 
 ㅇ URI를 통한 리소스 표현
    - 각 리소스는 고유한 URI로 식별되며, URI를 통해 해당 리소스에 접근한다.
    - URI는 계층 구조를 가지도록 설계하여, 리소스 간의 관계를 표현한다.
-   
+
 ㅇ 상태 코드 활용
    - HTTP 상태 코드를 사용하여 요청 처리 결과를 명확하게 전달한다.
      ( 예: 200 = OK, 201 = Created, 400 = Bad Request, 404 = Not Found )
-     
+
 ㅇ 무상태성(Stateless)
    - 각 요청은 독립적으로 처리되어야 하며, 서버는 클라이언트의 이전 요청 정보를 기억하지 않는다.
-   
+
 
 [ RESTful API의 장점 ]
 1 < 이해하기 쉬움 >
@@ -118,29 +117,29 @@ RESTFul API의 특징
 
 -> URI는 명사로 표현하고, 계층 구조를 가지도록 설계한다.
    - 예: /users, /products/123, /orders/456/items
-   
+
 2. < HTTP 메서드 사용 >
 -> 각 리소스에 대한 CRUD(Create, Read, Update, Delete) 작업을 표준 HTTP 메서드와 연결한다.
    - GET           : 조회
    - POST          : 생성
    - PUT 또는 PATCH : 수정
    - DELETE        : 삭제
-   
+
 3. < JSON 데이터 사용 >
 -> 클라이언트와 서버 간의 데이터 교환에 JSON 형식을 주로 사용
 -> 데이터 구조는 리소스를 잘 표현하도록 설계
-   
+
 4. < 상태 코드 사용 >
 -> HTTP 상태 코드를 사용하여 요청 처리 결과를 명확하게 전달한다.
    - 성공: 200, 201
    - 클라이언트 오류: 400, 401, 404
    - 서버 오류: 500
-   
+
 
 5. < HATEOAS (Hypermedia as the Engine of Application State) 적용 고려 (선택적)
 -> 서버가 클라이언트에게 다음 단계를 안내할 수 있는 하이퍼링크를 제공합니다. 
    (더욱 RESTful하게 만드는 방법)
-   
+
 
 [ REST FULL API 예시 ]
 -> 사용자 정보 조회
@@ -151,7 +150,7 @@ RESTFul API의 특징
    		"name":"John Doe",
    		"email":"john.doe@example.com"
    }
-   
+
 -> 새로운 사용자 생성
    ㅇ POST /users
    ㅇ 요청(JSON)
@@ -159,7 +158,7 @@ RESTFul API의 특징
    		"name":"Jane Doe",
    		"email": "jane.doe@example.com"
    }
-  
+
  -> 사용자 정보 수정
    ㅇ PUT /users/123 또는 PATCH /users/123
    ㅇ 요청(JSON)
@@ -169,7 +168,7 @@ RESTFul API의 특징
    
 -> 사용자 삭제
    ㅇ DELETE /users/123
-   
+
 [ 정리 ]
 RESTful API는 REST 원칙을 따르는 API로, 
 웹 서비스 개발에서 매우 중요한 역할을 합니다. 
