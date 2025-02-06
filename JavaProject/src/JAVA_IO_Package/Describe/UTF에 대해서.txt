@@ -12,8 +12,8 @@ UTF는 유니코드 문자 집합의 문자를 실제로 컴퓨터에 저장하�
  ㅇ 각 문자를 1바이트에서 4바이트까지 사용하여 표현한다.
  ㅇ ASCII 문자(영문, 숫자, 특수 문자)는 1바이트로 표현하므로 ASCII 호환성이 좋다.
  ㅇ 한글은 일반적으로 3바이트로 표현된다.
-    -> String s = "한"; -> System.out.println(s.getBytes("UTF-8").length); == 출력 값: 3
-    -> String s = "a"; -> System.out.println(s.getBytes("UTF-8").length); == 출력 값: 2
+ -> String s = "한"; -> try { System.out.println(s.getBytes("UTF-8").length);} catch(Exception e) { e.printStackTrace() } == 출력 값: 3
+ -> String s = "a"; -> try { System.out.println(s.getBytes("UTF-8").length);} catch(Exception e) { e.printStackTrace() } == 출력 값: 1
     
  ㅇ 웹 환경에서 가장 많이 사용되는 인코딩 방식이다.
  ㅇ 장점 : 효율적인 저장 공간 활용, ASCII 호환성, 네트워크 전송에 유리

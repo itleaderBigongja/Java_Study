@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.io.UnsupportedEncodingException;
 
 // 직렬화 가능한 객체를 만들기 위해 Serializable 인터페이스를 구현
 class Person implements Serializable{
