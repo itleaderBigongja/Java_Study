@@ -41,6 +41,5 @@ public class Thread_14_completedFuture_Method {
 		} catch (InterruptedException | ExecutionException e) {
 			e.printStackTrace();
 		}
-		
 	}
 }
