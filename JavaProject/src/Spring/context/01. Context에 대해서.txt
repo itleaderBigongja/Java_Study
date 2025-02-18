@@ -1,0 +1,138 @@
+Spring MVC에서 ApplicationContext의 역할
+
+Spring MVC에서는 두 개의 ApplicationContext가 생성된다.
+
+1. Root ApplicationContext( 전역 컨텍스트 설정 )
+ ㅇ ContextLoaderListener가 애플리케이션이 시작될 때 생성
+ ㅇ Service, Repository, Bean Configuration 등 비즈니스 로직 관련 Bean을 관리
+ ㅇ @Service, @Repository, @Component 등의 Bean이 포함됨
+ 
+
+2. WebApplicationContext( 웹 컨텍스트 )
+ ㅇ DispatcherServlet이 실행될 때 생성
+ ㅇ Spring MVC에서 Controller, View Resolver 등 웹 관련 Bean을 관리
+ ㅇ @Controller, ViewResolver, HandlerMapping 등이 포함됨
+ 
+ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
+
+Root Context와 Web Context의 관계
+ ㅇ Root Context가 Parent(부모), Web Context가 Child(자식)
+ ㅇ 즉, Web Context에서 Root Context의 Bean을 참조 가능, 반대는 불가능
+ ㅇ 이를 통해 비즈니스 로직과 웹 계층을 분리할 수 있음
+ 
+ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
+
+Spring MVC에서 ApplicationContext 동작 과정
+
+Spring MVC에서 ApplicationContext가 동작하는 과정을 이해하기 위해 HTTP 요청 처리 흐름을 보겠다.
+
+1. 클라이언트 요청
+GET방식 /user/1 HTTP/1.1
+Host: example.com
+
+2. DispatcherServlet이 요청을 가로챔
+public class MyWebAppInitializer implements WebApplicationInitializer {
+ 
+	@Override // 재정의
+	public void onStartup(ServletContext servlet) {
+		
+		// AnnotationConfigWebApplicationContext를 이용하여 WebApplicationContext 설정
+		AnnotaionConfigWebApplicationContext context = new AnnotaionConfigWebApplicationContext();
+		context.register(AppConfig.class);	// Root Context 설정
+		
+		// DispatcherServlet이 이 컨텍스트를 이용해 Controller를 찾음
+		DispatcherServlet dispatcherServlet = new DispatcherServlet(context); // Web Context 설정
+		ServletRegistration.Dynamic registration = servletContext.addServlet("dispatcher", dispatcherServlet);
+		
+		registration.setLoadOnStartup(1);
+		registration.addMapping("/");
+	}
+}
+
+/**
+ * 3. HandlerMapping이 컨트롤러 찾기
+ * UserController는 WebApplicationContext에서 관리되는 Bean
+ */
+@Controller
+@RequestMapping("/users")
+public class UserController {
+	
+	@Autowired
+	private final UserService userService;
+	
+	public UserController(UserService userService) {
+		this.userService = userService;
+	}
+	
+	@GetMapping("/{id}")
+	public ResponseEntity<User> getUser(@PathVariable Long id) {
+		return ResponseEntity.ok(userService.getUserById(id));
+	}
+}
+
+/**
+ * 4. Controller가 Service 호출
+ **/
+@Service
+public class UserService {
+	
+	@Autowired
+	private final UserRepository userRepository;
+	
+	// UserService가 UserRepository를 호출한다.
+	public UserService(UserRepository userRepository() {
+		this.userRepository = userRepository;
+	}
+	
+	public User getUserById(Long id) {
+		return userRepository.findById(id)
+					.onElseThrow(() -> new RuntimeException("User not found"));
+	}
+}
+
+/**
+ * 5. Repository가 데이터 조회
+ * UserRepository는 Root Context에서 관리되는 Bean
+ **/
+@Repository
+public class UserRepository {
+ 	
+	private final Map<Long, User> users = new HashMap<>();
+ 	
+	public Optional<User> findById(Long id) {
+ 		return Optional.ofNullable(users.get(id));
+	}
+}
+
+/**
+ * 6. ViewResolver가 View를 결정
+ * @RestController의 경우 JSON 형태로 바로 응답
+ * @Controller는 ViewResolver를 통해 JSP, Thymeleaf 등의 뷰로 전달
+ **/
+ 
+ /**
+  * 7. 응답 반환
+  * {
+  *		"id": 1,
+  *		"name":"John Doe"
+  * }
+  **/
+  
+  
+/**
+ * Spring MVC와 ApplicationContext의 관계 정리
+ * 계층				컨텍스트					주요 Bean
+ * Root Context 	ApplicationContext		Service, Repository, Component, DataSource
+ * Web Context		WebApplicationContext	Controller, ViewResolver, HandlerMapping
+ **/
+ ㅇ Controller -> Service 호출(가능)
+ ㅇ Service    -> Controller 호출(불가능)
+ ㅇ 웹 관련 Bean은 Web Context에서 관리
+ ㅇ 비즈니스 로직 관련 Bean은 Root Context에서 관리
+ 
+ 
+ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
+
+/**
+ * ApplicationContext를 활용한 고급 패턴
+ **/

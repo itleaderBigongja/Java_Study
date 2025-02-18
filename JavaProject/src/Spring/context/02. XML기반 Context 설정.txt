@@ -1,0 +1,157 @@
+Spring MVC에서 XML 기반 설정을 사용하여 Root Context와 Web Context를 구분하는 방식을 설명
+
+1. Spring MVC에서 Root Context와 Web Context 구분(XML 방식)
+ ㅇ Root Context : ContextLoaderListener에 의해 로드됨( from Spring MVC )
+ ㅇ Web Context : DispatcherServlet에 의해 로드됨( from Spring MVC )
+
+/*************************************
+ * Root Context( root-context.xml )
+ *************************************/
+ㅇ 애플리케이션의 전역 설정을 담당하는 컨텍스트
+ㅇ Service, Repository, Component, DataSource 등의 비즈니스 로직 관련 Bean을 관리
+ㅇ Mybatis 관련 설정(SqlSessionFactory, SqlSessionTemplate, DataSource 등) 포함
+ㅇ ContextLoaderListener가 실행될 때 자동으로 로드됨
+
+
+/*************************************
+ * Web Context( servlet-context.xml )
+ *************************************/
+ ㅇ 웹과 관련된 설정을 담당하는 컨텍스트
+ ㅇ Controller, ViewResolver, HandlerMapping 등 웹 계층 관련 Bean을 관리
+ ㅇ DispatcherServlet이 실행될 때 자동으로 로드됨
+ 
+
+/*************************************
+ * Root Context(root-context.xml)
+ *************************************/
+Root Context는 Service, Repository, DataSource 같은 비즈니스 로직과 관련된 Bean을 정의한다.
+
+[ Root Context 설정 특징 ]
+ ㅇ @Service, @Repository, @Component가 포함된 패키지를 component-scan으로 스캔
+ ㅇ DataSource와 MyBatis의 SqlSessionFactory, SqlSessionTemplate을 설정
+ ㅇ MapperScannerConfigurer를 사용하여 MyBatis의 @Mapper 인터페이스를 자동으로 등록
+ 
+ 
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mybatis="http://mybatis.org/schema/mybatis-spring"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/context
+           http://www.springframework.org/schema/context/spring-context.xsd
+           http://mybatis.org/schema/mybatis-spring
+           http://mybatis.org/schema/mybatis-spring.xsd">
+
+    <!-- 프로젝트 내의 Service, Repository, Component 스캔 -->
+    <context:component-scan base-package="com.example.service"/>
+    <context:component-scan base-package="com.example.repository"/>
+
+    <!-- 데이터 소스 설정 (MyBatis에서 사용할 DataSource) -->
+    <bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource">
+        <property name="driverClassName" value="com.mysql.cj.jdbc.Driver"/>
+        <property name="url" value="jdbc:mysql://localhost:3306/mydb"/>
+        <property name="username" value="root"/>
+        <property name="password" value="password"/>
+    </bean>  
+    
+    <!-- MyBatis SqlSessionTemplate 설정 -->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="configLocation" value="classpath:mybatis-config.xml"/>
+    </bean>
+    
+    <!-- MyBatis SqlSessionTemplate 설정 -->
+    <bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
+        <constructor-arg ref="sqlSessionFactory"/>
+    </bean>
+    
+   	<!-- MyBatis Mapper 스캔 -->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="com.example.mapper"/>
+    </bean>
+</beans>
+
+
+/*********************************************
+ * Web Context( WEB-INF/servlet-context.xml )
+ *********************************************/
+ ㅇ Web Context 설정 특징
+ ㅇ @Controller가 포함된 패키지를 context-scan으로 스캔
+ ㅇ ViewResolver를 등록하여, JSP, Thymeleaf 등의 View를 찾을 수 있도록 설정
+ ㅇ mvc:annotation-driven을 활성화하여 @RequestMapping 등의 MVC 기능을 사용 가능
+ ㅇ Root Context의 Bean(@Service, @Repository, @Component)을 자동으로 사용할 수 있음
+ 
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/context
+           http://www.springframework.org/schema/context/spring-context.xsd
+           http://www.springframework.org/schema/mvc
+           http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+
+    <!-- Controller 스캔 -->
+    <context:component-scan base-package="com.example.controller"/>
+
+    <!-- Spring MVC 설정 활성화 -->
+    <mvc:annotation-driven/>
+
+    <!-- View Resolver 설정 (JSP 사용) -->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/WEB-INF/views/"/>
+        <property name="suffix" value=".jsp"/>
+    </bean>
+</beans>
+
+
+/*******************************************************
+ * DispatcherServlet과 ContextLoaderLitener설정( web.xml )
+ *******************************************************/
+ㅇ WEB-INF/web.xml
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://java.sun.com/xml/ns/javaee"
+     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+     xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
+         http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+     version="3.0">
+     
+     <!-- Root Context 설정하기 위한 ContextLoaderListener 로드 -->
+     <listener>
+     	<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+     </listener>
+     <context-param>
+     	<param-name>contextConfigLocation</param-name>
+     	<param-value>/WEB-INF/root-context.xml</param-value>
+     </context-param>
+     
+     <!-- servlet-context.xml을 설정하기 위한 DispatcherServlet 로드 -->
+     <servlet>
+     	<servlet-name>appServlet</servlet-name>
+     	<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+     	<init-param>
+     		<param-name>contextConfigLocation</param-name>
+     		<param-value>/WEB-INF/servlet-context.xml</param-value>
+     	</init-param>
+     </servlet>
+     
+     <servlet-mapping>
+     	<servlet-name>appServlet</servlet-name>
+     	<url-pattern>/</url-pattern>
+     </servlet-mapping>
+</web-app>
+
+/*******************************************
+ * Root Context와 Web Context의 관계 정리
+ *******************************************/
+ 계층				컨텍스트					주요 Bean
+ Root Contexxt	ContextLoaderListener	@Service, @Repository, DataSource(JDBC), SqlSessionFactory, SqlSessionTemplate
+ Web Context	DispatcherServlet		@Controller, ViewResolver, HandlerMapping
+ 
+ ㅇ Root Context가 먼저 생성, Web Context가 그 아래에서 관리됨
+ ㅇ Web Context는 Root Context의 Bean을 참조 가능(UserService 사용 가능 )
+ ㅇ 반대로 Root Context에서 Web Context의 Bean을 참조할 수 없음( Controller 직접 접근 불가)
